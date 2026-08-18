@@ -93,6 +93,25 @@
     font-weight:600;
   }
 
+  /* ===================== ANIMATION REVEAL (POWERPOINT STYLE) ===================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px) scale(0.98);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   /* ===================== NAV ===================== */
   nav{
     position:fixed; top:0; left:0; right:0; z-index:60;
@@ -434,7 +453,6 @@
   .mobile-menu.is-open{ display:flex; }
 
   /* ===================== RESPONSIVE ===================== */
-  /* Tablets and small laptops */
   @media (max-width:1100px){
     nav{ padding-inline:1.25rem; }
     .nav-center a{ padding-inline:.55rem; font-size:.72rem; }
@@ -447,7 +465,6 @@
     .proj-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   }
 
-  /* Mobile navigation + layout */
   @media (max-width:900px){
     nav{ min-height:64px; padding:.75rem 1rem; }
     .nav-center{ display:none; }
@@ -504,7 +521,6 @@
     #mobileMenu a{ padding:.7rem 0; border-bottom:1px solid var(--line); }
   }
 
-  /* Very small phones */
   @media (max-width:480px){
     nav{ padding-inline:.75rem; }
     .logo{ font-size:.92rem; }
@@ -521,7 +537,6 @@
     .tag{ max-width:100%; overflow-wrap:anywhere; }
   }
 
-  /* Touch devices: remove hover lift to avoid sticky/odd interactions */
   @media (hover:none){
     .btn:hover, .fcard:hover, .pcard:hover{ transform:none; }
   }
@@ -571,7 +586,7 @@
 
 <div id="top" class="hero">
   <div class="hero-grid">
-    <div>
+    <div class="reveal">
       <div class="badge-pill"><span data-i18n="hero.badgePill">Tecnologia • Educação • Disciplina</span></div>
       <h1 data-i18n="hero.h1">Construindo software<br>com <em>clareza</em> e disciplina.</h1>
       <p class="lede" data-i18n="hero.lede">
@@ -584,7 +599,7 @@
         <a href="#formacao" class="btn btn-dark" data-i18n="hero.cta2">Minha Trajetória</a>
       </div>
     </div>
-    <div class="hero-photo">
+    <div class="hero-photo reveal">
       <img src="Abel.jpeg" alt="Foto de Abel" width="800" height="1000" decoding="async" fetchpriority="high" />
       <div class="hero-badge">
         <div class="icon">
@@ -598,7 +613,7 @@
     </div>
   </div>
 
-  <div class="scroll-strip">
+  <div class="scroll-strip reveal">
     <span class="scroll-vert" data-i18n="scroll.label">Scroll</span>
     <div class="marquee">
       <div class="marquee-track">
@@ -619,12 +634,12 @@
 
 <!-- ===================== SOBRE ===================== -->
 <section id="sobre">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div><span class="eyebrow" data-i18n="sobre.eyebrow">01 — Quem sou</span><h2 data-i18n="sobre.h2">Sobre</h2></div>
     <span class="sec-num">São Paulo, BR</span>
   </div>
   <div class="about-grid">
-    <div>
+    <div class="reveal">
       <p data-i18n="sobre.p1">
         Sou <b>Abel</b>, estudante de <b>Análise e Desenvolvimento de Sistemas na UNINOVE</b>,
         com conclusão prevista para dezembro de 2026. Estou construindo, de forma disciplinada
@@ -640,7 +655,7 @@
         me preparo para minha primeira posição formal em tecnologia.
       </p>
     </div>
-    <div class="about-meta">
+    <div class="about-meta reveal">
       <div><span data-i18n="sobre.meta.formacaoLabel">Formação</span><b data-i18n="sobre.meta.formacaoValue">ADS · UNINOVE · Dez/2026</b></div>
       <div><span data-i18n="sobre.meta.focoLabel">Foco</span><b data-i18n="sobre.meta.focoValue">Desenvolvimento Backend</b></div>
       <div><span data-i18n="sobre.meta.buscandoLabel">Buscando</span><b data-i18n="sobre.meta.buscandoValue">Vaga Júnior em Tech</b></div>
@@ -651,27 +666,27 @@
 
 <!-- ===================== ATUAÇÃO ===================== -->
 <section id="atuacao">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div><span class="eyebrow" data-i18n="atuacao.eyebrow">02 — Onde atuo</span><h2 data-i18n="atuacao.h2">Atuação</h2></div>
     <span class="sec-num" data-i18n="atuacao.secnum">4 frentes</span>
   </div>
   <div class="card-grid">
-    <div class="fcard">
+    <div class="fcard reveal">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
       <h3 data-i18n="atuacao.card1.h3">Desenvolvimento Backend</h3>
       <p data-i18n="atuacao.card1.p">Construção de APIs e regras de negócio com C# e ASP.NET Core, do design da rota à resposta.</p>
     </div>
-    <div class="fcard">
+    <div class="fcard reveal">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></div>
       <h3 data-i18n="atuacao.card2.h3">Modelagem &amp; Dados</h3>
       <p data-i18n="atuacao.card2.p">Estruturação de bancos relacionais com Entity Framework Core e SQL, pensando em consistência dos dados.</p>
     </div>
-    <div class="fcard">
+    <div class="fcard reveal">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
       <h3 data-i18n="atuacao.card3.h3">Análise de Dados</h3>
       <p data-i18n="atuacao.card3.p">Estudo aplicado de análise de dados como frente complementar ao desenvolvimento backend.</p>
     </div>
-    <div class="fcard">
+    <div class="fcard reveal">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
       <h3 data-i18n="atuacao.card4.h3">Suporte Técnico</h3>
       <p data-i18n="atuacao.card4.p">Diagnóstico e resolução estruturada de problemas — uma habilidade que atravessa todas as minhas frentes.</p>
@@ -681,12 +696,12 @@
 
 <!-- ===================== STACK ===================== -->
 <section id="stack">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div><span class="eyebrow" data-i18n="stack.eyebrow">03 — Ferramentas</span><h2 data-i18n="stack.h2">Stack</h2></div>
     <span class="sec-num" data-i18n="stack.secnum">em construção contínua</span>
   </div>
   <div class="stack-groups">
-    <div class="stack-group">
+    <div class="stack-group reveal">
       <h3 data-i18n="stack.group0">Fullstack</h3>
       <div class="tag-row">
         <span class="tag">HTML</span>
@@ -698,7 +713,7 @@
         <span class="tag">GitHub</span>
       </div>
     </div>
-    <div class="stack-group">
+    <div class="stack-group reveal">
       <h3 data-i18n="stack.group1">Linguagem &amp; Backend</h3>
       <div class="tag-row">
         <span class="tag">C#</span>
@@ -706,7 +721,7 @@
         <span class="tag">Entity Framework Core</span>
       </div>
     </div>
-    <div class="stack-group">
+    <div class="stack-group reveal">
       <h3 data-i18n="stack.group2">Dados</h3>
       <div class="tag-row">
         <span class="tag">SQLite</span>
@@ -714,14 +729,14 @@
         <span class="tag faint" data-i18n="stack.tagAnalise">Análise de Dados</span>
       </div>
     </div>
-    <div class="stack-group">
+    <div class="stack-group reveal">
       <h3 data-i18n="stack.group3">Ferramentas</h3>
       <div class="tag-row">
         <span class="tag">Git</span>
         <span class="tag">GitHub</span>
       </div>
     </div>
-    <div class="stack-group">
+    <div class="stack-group reveal">
       <h3 data-i18n="stack.group4">Idiomas</h3>
       <div class="tag-row">
         <span class="tag" data-i18n="stack.tagPt">Português — Nativo</span>
@@ -734,12 +749,12 @@
 
 <!-- ===================== FORMAÇÃO ===================== -->
 <section id="formacao">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div><span class="eyebrow" data-i18n="formacao.eyebrow">04 — Trajetória acadêmica</span><h2 data-i18n="formacao.h2">Formação</h2></div>
     <span class="sec-num" data-i18n="formacao.secnum">01 registro</span>
   </div>
   <div class="timeline">
-    <div class="tl-item">
+    <div class="tl-item reveal">
       <span class="when" data-i18n="formacao.when">2023 — Dez/2026</span>
       <div>
         <h3 data-i18n="formacao.tlH3">Análise e Desenvolvimento de Sistemas</h3>
@@ -752,27 +767,27 @@
 
 <!-- ===================== VALORES ===================== -->
 <section id="valores">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div><span class="eyebrow" data-i18n="valores.eyebrow">05 — Como trabalho</span><h2 data-i18n="valores.h2">Valores</h2></div>
     <span class="sec-num" data-i18n="valores.secnum">4 princípios</span>
   </div>
   <div class="values-grid">
-    <div class="vcard">
+    <div class="vcard reveal">
       <div class="n">01</div>
       <h3 data-i18n="valores.v1.h3">Rigor</h3>
       <p data-i18n="valores.v1.p">Testar antes de assumir, entender antes de implementar.</p>
     </div>
-    <div class="vcard">
+    <div class="vcard reveal">
       <div class="n">02</div>
       <h3 data-i18n="valores.v2.h3">Clareza</h3>
       <p data-i18n="valores.v2.p">Código e comunicação simples são sempre a meta final.</p>
     </div>
-    <div class="vcard">
+    <div class="vcard reveal">
       <div class="n">03</div>
       <h3 data-i18n="valores.v3.h3">Disciplina</h3>
       <p data-i18n="valores.v3.p">Progresso constante importa mais do que picos de esforço.</p>
     </div>
-    <div class="vcard">
+    <div class="vcard reveal">
       <div class="n">04</div>
       <h3 data-i18n="valores.v4.h3">Aprendizado contínuo</h3>
       <p data-i18n="valores.v4.p">Cada projeto é tratado como uma chance real de evoluir.</p>
@@ -782,12 +797,12 @@
 
 <!-- ===================== PROJETOS ===================== -->
 <section id="projetos">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div><span class="eyebrow" data-i18n="projetos.eyebrow">06 — Prática aplicada</span><h2 data-i18n="projetos.h2">Projetos</h2></div>
     <span class="sec-num" data-i18n="projetos.secnum">01 embarcado · mais a caminho</span>
   </div>
   <div class="proj-grid">
-    <div class="pcard">
+    <div class="pcard reveal">
       <span class="code" data-i18n="projetos.p1.code">PROJ / 001 — BACKEND</span>
       <h3>TexShoes</h3>
       <p data-i18n="projetos.p1.p">
@@ -801,7 +816,7 @@
         <span class="tag">SQLite</span>
       </div>
     </div>
-    <div class="pcard soon">
+    <div class="pcard soon reveal">
       <span class="code" data-i18n="projetos.p2.code">PROJ / 002</span>
       <h3 style="color:var(--muted)" data-i18n="projetos.p2.h3">Próximo projeto</h3>
       <p data-i18n="projetos.p2.p">Em desenvolvimento — em breve nesta seção.</p>
@@ -811,16 +826,18 @@
 
 <!-- ===================== CONTATO ===================== -->
 <footer id="contato">
-  <span class="eyebrow" data-i18n="contato.eyebrow">07 — Vamos conversar</span>
-  <h2 data-i18n="contato.h2">Pronto para a próxima etapa.</h2>
-  <p class="sub" data-i18n="contato.sub">
-    Aberto a oportunidades júnior em desenvolvimento backend, análise de dados ou
-    suporte técnico, em São Paulo ou remoto.
-  </p>
-  <div class="contact-row">
-    <a class="btn btn-light" href="mailto:abelmit50@gmail.com" data-i18n="contato.email">✉ E-mail</a>
-    <a class="btn btn-dark" href="https://www.linkedin.com/in/abel-mitango" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn btn-dark" href="https://github.com/Abel-Mitango-Cimona" target="_blank" rel="noopener">GitHub</a>
+  <div class="reveal">
+    <span class="eyebrow" data-i18n="contato.eyebrow">07 — Vamos conversar</span>
+    <h2 data-i18n="contato.h2">Pronto para a próxima etapa.</h2>
+    <p class="sub" data-i18n="contato.sub">
+      Aberto a oportunidades júnior em desenvolvimento backend, análise de dados ou
+      suporte técnico, em São Paulo ou remoto.
+    </p>
+    <div class="contact-row">
+      <a class="btn btn-light" href="mailto:abelmit50@gmail.com" data-i18n="contato.email">✉ E-mail</a>
+      <a class="btn btn-dark" href="https://www.linkedin.com/in/abel-mitango" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-dark" href="https://github.com/Abel-Mitango-Cimona" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </div>
   <div class="foot-bar">
     <span>ABEL — SÃO PAULO / BR</span>
@@ -918,7 +935,7 @@
       "atuacao.card2.h3": { pt:"Modelagem &amp; Dados", en:"Modeling &amp; Data", fr:"Modélisation &amp; Données" },
       "atuacao.card2.p": { pt:"Estruturação de bancos relacionais com Entity Framework Core e SQL, pensando em consistência dos dados.", en:"Structuring relational databases with Entity Framework Core and SQL, with data consistency in mind.", fr:"Structuration de bases de données relationnelles avec Entity Framework Core et SQL, en pensant à la cohérence des données." },
       "atuacao.card3.h3": { pt:"Análise de Dados", en:"Data Analysis", fr:"Analyse de Données" },
-      "atuacao.card3.p": { pt:"Estudo aplicado de análise de dados como frente complementar ao desenvolvimento backend.", en:"Applied study of data analysis as a complementary area to backend development.", fr:"Étude appliquée de l'analyse de données comme domaine complémentaire au développement backend." },
+      "atuacao.card3.p": { pt:"Estudo aplicado de análise de dados como frente complementar ao desenvolvimento backend.", en:"Applied study of data analysis as a complementary area to backend development.", fr:"Étude appliquée de l'analyse de données comme domaine complementary au développement backend." },
       "atuacao.card4.h3": { pt:"Suporte Técnico", en:"Technical Support", fr:"Support Technique" },
       "atuacao.card4.p": { pt:"Diagnóstico e resolução estruturada de problemas — uma habilidade que atravessa todas as minhas frentes.", en:"Structured diagnosis and problem-solving — a skill that runs through everything I do.", fr:"Diagnostic et résolution structurée de problèmes — une compétence présente dans tous mes domaines." },
 
@@ -955,7 +972,7 @@
       "valores.v4.h3": { pt:"Aprendizado contínuo", en:"Continuous learning", fr:"Apprentissage continu" },
       "valores.v4.p": { pt:"Cada projeto é tratado como uma chance real de evoluir.", en:"Every project is treated as a real chance to grow.", fr:"Chaque projet est traité comme une véritable chance de progresser." },
 
-      "projetos.eyebrow": { pt:"06 — Prática aplicada", en:"06 — Applied practice", fr:"06 — Pratique appliquée" },
+      "projetos.eyebrow": { pt:"06 — Prática applied", en:"06 — Applied practice", fr:"06 — Pratique appliquée" },
       "projetos.h2": { pt:"Projetos", en:"Projects", fr:"Projets" },
       "projetos.secnum": { pt:"01 embarcado · mais a caminho", en:"01 shipped · more on the way", fr:"01 livré · d'autres à venir" },
       "projetos.p1.code": { pt:"PROJ / 001 — BACKEND", en:"PROJ / 001 — BACKEND", fr:"PROJ / 001 — BACKEND" },
@@ -1000,6 +1017,29 @@
       });
       try { localStorage.setItem('abel-lang', lang); } catch(e){}
     }
+  })();
+</script>
+
+<!-- Script do Intersection Observer para revelar elementos na rolagem -->
+<script>
+  (function(){
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries, observer){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    reveals.forEach(function(el){
+      observer.observe(el);
+    });
   })();
 </script>
 
