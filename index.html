@@ -93,11 +93,11 @@
     font-weight:600;
   }
 
-  /* ===================== ANIMATION REVEAL (POWERPOINT STYLE) ===================== */
+  /* ===================== ANIMATION REVEAL (MÓVEL & DESKTOP) ===================== */
   .reveal {
     opacity: 0;
-    transform: translateY(35px) scale(0.98);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(28px) scale(0.98);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
   .reveal.active {
@@ -244,7 +244,7 @@
     border:1px solid var(--line);
     background:var(--surface);
     aspect-ratio:4/5;
-    max-width:400px;
+    max-width:380px;
     margin-left:auto;
     padding:1.1rem;
     display:flex;
@@ -452,7 +452,7 @@
   }
   .mobile-menu.is-open{ display:flex; }
 
-  /* ===================== RESPONSIVE ===================== */
+  /* ===================== RESPONSIVE (CELULAR & TABLET) ===================== */
   @media (max-width:1100px){
     nav{ padding-inline:1.25rem; }
     .nav-center a{ padding-inline:.55rem; font-size:.72rem; }
@@ -475,9 +475,21 @@
 
     .hero{ padding:7.5rem 1rem 0; }
     .hero-grid{ grid-template-columns:1fr; gap:2rem; }
-    .hero-photo{ order:-1; aspect-ratio:4/3; width:min(100%,360px); max-width:360px; margin:0 auto; padding:.7rem; }
-    .hero-photo img{ border-radius:calc(var(--radius-lg) - .7rem); }
-    .hero-badge{ right:.6rem; bottom:-1rem; max-width:210px; padding:.65rem .8rem; }
+
+    /* FOTO AJUSTADA PARA CELULAR: Proporção mantida, sem cortar o topo/base */
+    .hero-photo{
+      order:-1;
+      aspect-ratio:4/5;
+      width:min(100%,280px);
+      max-width:280px;
+      margin:0 auto;
+      padding:.6rem;
+    }
+    .hero-photo img{
+      object-fit:contain;
+      border-radius:calc(var(--radius-lg) - .6rem);
+    }
+    .hero-badge{ right:.2rem; bottom:-1rem; max-width:200px; padding:.6rem .8rem; }
     .hero h1{ font-size:clamp(2.15rem,9vw,3rem); line-height:1.08; }
     .hero p.lede{ font-size:.98rem; line-height:1.65; }
     .hero-cta{ display:grid; grid-template-columns:1fr; gap:.7rem; }
@@ -526,8 +538,8 @@
     .logo{ font-size:.92rem; }
     .lang-toggle{ display:none; }
     .hero{ padding-inline:.85rem; padding-top:7rem; }
-    .hero-photo{ width:min(100%,300px); }
-    .hero-badge{ right:.2rem; max-width:190px; }
+    .hero-photo{ width:min(100%,250px); }
+    .hero-badge{ right:0; max-width:180px; }
     .badge-pill{ max-width:100%; padding:.45rem .7rem; }
     .badge-pill span{ font-size:.58rem; letter-spacing:.1em; }
     section, footer{ padding-inline:.85rem; }
@@ -950,7 +962,7 @@
       "stack.group3": { pt:"Ferramentas", en:"Tools", fr:"Outils" },
       "stack.group4": { pt:"Idiomas", en:"Languages", fr:"Langues" },
       "stack.tagPt": { pt:"Português — Nativo", en:"Portuguese — Native", fr:"Portugais — Natif" },
-      "stack.tagFr": { pt:"Francês — Fluente", en:"French — Fluent", fr:"Français — Courant" },
+      "stack.tagFr": { pt:"Francês — Fluente", en:"French — Courant" },
       "stack.tagEn": { pt:"Inglês — Intermediário", en:"English — Intermediate", fr:"Anglais — Intermédiaire" },
 
       "formacao.eyebrow": { pt:"04 — Trajetória acadêmica", en:"04 — Academic path", fr:"04 — Parcours académique" },
@@ -972,7 +984,7 @@
       "valores.v4.h3": { pt:"Aprendizado contínuo", en:"Continuous learning", fr:"Apprentissage continu" },
       "valores.v4.p": { pt:"Cada projeto é tratado como uma chance real de evoluir.", en:"Every project is treated as a real chance to grow.", fr:"Chaque projet est traité comme une véritable chance de progresser." },
 
-      "projetos.eyebrow": { pt:"06 — Prática applied", en:"06 — Applied practice", fr:"06 — Pratique appliquée" },
+      "projetos.eyebrow": { pt:"06 — Prática aplicada", en:"06 — Applied practice", fr:"06 — Pratique appliquée" },
       "projetos.h2": { pt:"Projetos", en:"Projects", fr:"Projets" },
       "projetos.secnum": { pt:"01 embarcado · mais a caminho", en:"01 shipped · more on the way", fr:"01 livré · d'autres à venir" },
       "projetos.p1.code": { pt:"PROJ / 001 — BACKEND", en:"PROJ / 001 — BACKEND", fr:"PROJ / 001 — BACKEND" },
@@ -1020,10 +1032,17 @@
   })();
 </script>
 
-<!-- Script do Intersection Observer para revelar elementos na rolagem -->
+<!-- Script otimizado do Intersection Observer para disparar animações suavemente no celular -->
 <script>
   (function(){
     var reveals = document.querySelectorAll('.reveal');
+
+    var observerOptions = {
+      root: null,
+      threshold: 0.05,
+      rootMargin: "0px 0px 50px 0px"
+    };
+
     var observer = new IntersectionObserver(function(entries, observer){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
@@ -1031,11 +1050,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, {
-      root: null,
-      threshold: 0.12,
-      rootMargin: "0px 0px -40px 0px"
-    });
+    }, observerOptions);
 
     reveals.forEach(function(el){
       observer.observe(el);
