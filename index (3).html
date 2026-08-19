@@ -8,6 +8,7 @@
 <meta property="og:image" content="https://portfolio-abel-chi.vercel.app/imagem-vertical.png" />
 <meta property="og:url" content="https://portfolio-abel-chi.vercel.app" />
 
+
 <title>Abel — Portfólio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter:ital@1&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -114,6 +115,28 @@
       opacity: 1;
       transform: none;
       transition: none;
+    }
+  }
+
+  /* ===================== LETTER REVEAL (título aparecendo letra a letra ao rolar) ===================== */
+  .letters .word{
+    display:inline-block;
+  }
+  .letters .letter{
+    display:inline-block;
+    opacity:0;
+    transform:translateY(0.45em) rotate(6deg);
+    transition:opacity .5s cubic-bezier(0.16,1,0.3,1), transform .5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .letters.active .letter{
+    opacity:1;
+    transform:translateY(0) rotate(0deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .letters .letter{
+      opacity:1;
+      transform:none;
+      transition:none;
     }
   }
 
@@ -1034,6 +1057,86 @@
       });
       try { localStorage.setItem('abel-lang', lang); } catch(e){}
     }
+  })();
+</script>
+
+<!-- Script do efeito "letra por letra" nos títulos ao rolar (funciona bem no celular) -->
+<script>
+  (function(){
+    var targets = Array.prototype.slice.call(
+      document.querySelectorAll(
+        '.hero h1, .hero p.lede, .sec-head h2, ' +
+        '#sobre p, .fcard h3, .fcard p, .tl-item h3, .tl-item p, ' +
+        '.vcard h3, .vcard p, .pcard h3, .pcard p, ' +
+        'footer h2, footer p.sub'
+      )
+    );
+    if(!targets.length) return;
+
+    function wrapLetters(el){
+      var counter = 0;
+      function processTextNode(node){
+        var text = node.textContent;
+        var parts = text.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        parts.forEach(function(chunk){
+          if(!chunk.length) return;
+          if(/^\s+$/.test(chunk)){
+            frag.appendChild(document.createTextNode(chunk));
+            return;
+          }
+          var wordSpan = document.createElement('span');
+          wordSpan.className = 'word';
+          for(var i=0;i<chunk.length;i++){
+            var letterSpan = document.createElement('span');
+            letterSpan.className = 'letter';
+            letterSpan.style.transitionDelay = Math.min(counter*14, 750)+'ms';
+            letterSpan.textContent = chunk[i];
+            counter++;
+            wordSpan.appendChild(letterSpan);
+          }
+          frag.appendChild(wordSpan);
+        });
+        node.parentNode.replaceChild(frag, node);
+      }
+      function walk(node){
+        if(node.nodeType === 3){
+          processTextNode(node);
+        } else if(node.nodeType === 1 && node.tagName !== 'BR'){
+          Array.prototype.slice.call(node.childNodes).forEach(walk);
+        }
+      }
+      Array.prototype.slice.call(el.childNodes).forEach(walk);
+      el.classList.add('letters');
+    }
+
+    targets.forEach(wrapLetters);
+
+    var io = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('active');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:"0px 0px -8% 0px" });
+
+    targets.forEach(function(el){ io.observe(el); });
+
+    /* Se o usuário trocar de idioma (PT/FR/EN), o texto é reescrito via innerHTML —
+       aqui a gente reaplica o efeito sem esconder de novo o que já apareceu. */
+    var mo = new MutationObserver(function(mutations){
+      mo.disconnect();
+      mutations.forEach(function(m){
+        var el = m.target;
+        if(targets.indexOf(el) === -1) return;
+        var wasActive = el.classList.contains('active');
+        wrapLetters(el);
+        if(wasActive) el.classList.add('active');
+      });
+      targets.forEach(function(t){ mo.observe(t, { childList:true }); });
+    });
+    targets.forEach(function(t){ mo.observe(t, { childList:true }); });
   })();
 </script>
 
