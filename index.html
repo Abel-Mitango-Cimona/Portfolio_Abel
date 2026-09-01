@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Meu Portfólio | Software & Produtos Digitais" />
+<meta property="og:description" content="Portfólio com projetos focados em desenvolvimento Full Stack no ecossistema JavaScript/TypeScript." />
+<meta property="og:image" content="https://portfolio-abel-chi.vercel.app/imagem-vertical.png" />
+<meta property="og:url" content="https://portfolio-abel-chi.vercel.app" />
+
+
 <title>Abel — Portfólio</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1639,6 +1645,7 @@ footer p.sub{
     opacity:1;
   }
 
+<<<<<<< HEAD
   50%{
     opacity:.15;
   }
@@ -1707,6 +1714,31 @@ html[data-theme="light"] .mobile-menu{
 
 @media (max-width:1100px){
 
+=======
+  /* ===================== LETTER REVEAL (título aparecendo letra a letra ao rolar) ===================== */
+  .letters .word{
+    display:inline-block;
+  }
+  .letters .letter{
+    display:inline-block;
+    opacity:0;
+    transform:translateY(0.45em) rotate(6deg);
+    transition:opacity .5s cubic-bezier(0.16,1,0.3,1), transform .5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .letters.active .letter{
+    opacity:1;
+    transform:translateY(0) rotate(0deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .letters .letter{
+      opacity:1;
+      transform:none;
+      transition:none;
+    }
+  }
+
+  /* ===================== NAV ===================== */
+>>>>>>> 70a077b6e318ac1108e95f5663c252dc5dfa92f8
   nav{
     padding-inline:1.25rem;
   }
@@ -3716,6 +3748,186 @@ html[data-theme="light"] .mobile-menu{
 
           setMobileMenu(false);
 
+<<<<<<< HEAD
+=======
+      "stack.eyebrow": { pt:"03 — Ferramentas", en:"03 — Tools", fr:"03 — Outils" },
+      "stack.h2": { pt:"Stack", en:"Stack", fr:"Stack" },
+      "stack.secnum": { pt:"em construção contínua", en:"continuously evolving", fr:"en constante évolution" },
+      "stack.group0": { pt:"Fullstack", en:"Fullstack", fr:"Fullstack" },
+      "stack.tagMysql": { pt:"Banco de Dados Relacionais (MySQL)", en:"Relational Databases (MySQL)", fr:"Bases de Données Relationnelles (MySQL)" },
+      "stack.group1": { pt:"Linguagem &amp; Backend", en:"Language &amp; Backend", fr:"Langage &amp; Backend" },
+      "stack.group2": { pt:"Dados", en:"Data", fr:"Données" },
+      "stack.tagAnalise": { pt:"Análise de Dados", en:"Data Analysis", fr:"Analyse de Données" },
+      "stack.group3": { pt:"Ferramentas", en:"Tools", fr:"Outils" },
+      "stack.group4": { pt:"Idiomas", en:"Languages", fr:"Langues" },
+      "stack.tagPt": { pt:"Português — Nativo", en:"Portuguese — Native", fr:"Portugais — Natif" },
+      "stack.tagFr": { pt:"Francês — Fluente", en:"French — Courant" },
+      "stack.tagEn": { pt:"Inglês — Intermediário", en:"English — Intermediate", fr:"Anglais — Intermédiaire" },
+
+      "formacao.eyebrow": { pt:"04 — Trajetória acadêmica", en:"04 — Academic path", fr:"04 — Parcours académique" },
+      "formacao.h2": { pt:"Formação", en:"Education", fr:"Formation" },
+      "formacao.secnum": { pt:"01 registro", en:"01 entry", fr:"01 diplôme" },
+      "formacao.when": { pt:"2023 — Dez/2026", en:"2023 — Dec/2026", fr:"2023 — Déc/2026" },
+      "formacao.tlH3": { pt:"Análise e Desenvolvimento de Sistemas", en:"Systems Analysis and Development", fr:"Analyse et Développement de Systèmes" },
+      "formacao.tlP": { pt:"UNINOVE, São Paulo. Graduação com conclusão prevista para dezembro de 2026, com foco em desenvolvimento de software e formação técnica para atuação backend.", en:"UNINOVE, São Paulo. Degree expected to be completed in December 2026, focused on software development and technical training for backend work.", fr:"UNINOVE, São Paulo. Formation dont l'achèvement est prévu en décembre 2026, axée sur le développement logiciel et la formation technique pour le backend." },
+
+      "valores.eyebrow": { pt:"05 — Como trabalho", en:"05 — How I work", fr:"05 — Ma façon de travailler" },
+      "valores.h2": { pt:"Valores", en:"Values", fr:"Valeurs" },
+      "valores.secnum": { pt:"4 princípios", en:"4 principles", fr:"4 principes" },
+      "valores.v1.h3": { pt:"Rigor", en:"Rigor", fr:"Rigueur" },
+      "valores.v1.p": { pt:"Testar antes de assumir, entender antes de implementar.", en:"Test before assuming, understand before implementing.", fr:"Tester avant de supposer, comprendre avant d'implémenter." },
+      "valores.v2.h3": { pt:"Clareza", en:"Clarity", fr:"Clarté" },
+      "valores.v2.p": { pt:"Código e comunicação simples são sempre a meta final.", en:"Simple code and communication are always the end goal.", fr:"Un code et une communication simples restent toujours l'objectif final." },
+      "valores.v3.h3": { pt:"Disciplina", en:"Discipline", fr:"Discipline" },
+      "valores.v3.p": { pt:"Progresso constante importa mais do que picos de esforço.", en:"Steady progress matters more than bursts of effort.", fr:"Les progrès constants comptent plus que les pics d'effort." },
+      "valores.v4.h3": { pt:"Aprendizado contínuo", en:"Continuous learning", fr:"Apprentissage continu" },
+      "valores.v4.p": { pt:"Cada projeto é tratado como uma chance real de evoluir.", en:"Every project is treated as a real chance to grow.", fr:"Chaque projet est traité comme une véritable chance de progresser." },
+
+      "projetos.eyebrow": { pt:"06 — Prática aplicada", en:"06 — Applied practice", fr:"06 — Pratique appliquée" },
+      "projetos.h2": { pt:"Projetos", en:"Projects", fr:"Projets" },
+      "projetos.secnum": { pt:"01 embarcado · mais a caminho", en:"01 shipped · more on the way", fr:"01 livré · d'autres à venir" },
+      "projetos.p1.code": { pt:"PROJ / 001 — BACKEND", en:"PROJ / 001 — BACKEND", fr:"PROJ / 001 — BACKEND" },
+      "projetos.p1.p": { pt:"API backend para um e-commerce de calçados, construída como projeto de portfólio e fio condutor de estudo de desenvolvimento backend em C# — da modelagem de dados até a camada de acesso.", en:"Backend API for a footwear e-commerce, built as a portfolio project and a study thread for backend development in C# — from data modeling to the access layer.", fr:"API backend pour un e-commerce de chaussures, conçue comme projet de portfolio et fil conducteur d'étude du développement backend en C# — de la modélisation des données jusqu'à la couche d'accès." },
+      "projetos.p2.code": { pt:"PROJ / 002", en:"PROJ / 002", fr:"PROJ / 002" },
+      "projetos.p2.h3": { pt:"Próximo projeto", en:"Next project", fr:"Prochain projet" },
+      "projetos.p2.p": { pt:"Em desenvolvimento — em breve nesta seção.", en:"In progress — coming soon to this section.", fr:"En cours de développement — bientôt disponible dans cette section." },
+
+      "contato.eyebrow": { pt:"07 — Vamos conversar", en:"07 — Let's talk", fr:"07 — Discutons" },
+      "contato.h2": { pt:"Pronto para a próxima etapa.", en:"Ready for the next step.", fr:"Prêt pour la prochaine étape." },
+      "contato.sub": { pt:"Aberto a oportunidades júnior em desenvolvimento backend, análise de dados ou suporte técnico, em São Paulo ou remoto.", en:"Open to junior opportunities in backend development, data analysis, or technical support, in São Paulo or remote.", fr:"Ouvert aux opportunités junior en développement backend, analyse de données ou support technique, à São Paulo ou à distance." },
+      "contato.email": { pt:"✉ E-mail", en:"✉ Email", fr:"✉ E-mail" },
+      "contato.disponivel": { pt:"Disponível para novos desafios", en:"Available for new opportunities", fr:"Disponible pour de nouveaux défis" },
+      "contato.foot": { pt:"PORTFÓLIO · 2026", en:"PORTFOLIO · 2026", fr:"PORTFOLIO · 2026" }
+    };
+
+    var root = document.documentElement;
+    var langPt = document.getElementById('langPt');
+    var langFr = document.getElementById('langFr');
+    var langEn = document.getElementById('langEn');
+    var langCodes = { pt:'pt-BR', fr:'fr-FR', en:'en' };
+    var stored = null;
+    try { stored = localStorage.getItem('abel-lang'); } catch(e){}
+
+    applyLang(stored || 'pt');
+
+    langPt.addEventListener('click', function(){ applyLang('pt'); });
+    langFr.addEventListener('click', function(){ applyLang('fr'); });
+    langEn.addEventListener('click', function(){ applyLang('en'); });
+
+    function applyLang(lang){
+      if(!langCodes[lang]) lang = 'pt';
+      root.setAttribute('lang', langCodes[lang]);
+      langPt.classList.toggle('active', lang === 'pt');
+      langFr.classList.toggle('active', lang === 'fr');
+      langEn.classList.toggle('active', lang === 'en');
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var key = el.getAttribute('data-i18n');
+        var entry = translations[key];
+        if(!entry) return;
+        el.innerHTML = entry[lang] || entry.pt;
+      });
+      try { localStorage.setItem('abel-lang', lang); } catch(e){}
+    }
+  })();
+</script>
+
+<!-- Script do efeito "letra por letra" nos títulos ao rolar (funciona bem no celular) -->
+<script>
+  (function(){
+    var targets = Array.prototype.slice.call(
+      document.querySelectorAll(
+        '.hero h1, .hero p.lede, .sec-head h2, ' +
+        '#sobre p, .fcard h3, .fcard p, .tl-item h3, .tl-item p, ' +
+        '.vcard h3, .vcard p, .pcard h3, .pcard p, ' +
+        'footer h2, footer p.sub'
+      )
+    );
+    if(!targets.length) return;
+
+    function wrapLetters(el){
+      var counter = 0;
+      function processTextNode(node){
+        var text = node.textContent;
+        var parts = text.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        parts.forEach(function(chunk){
+          if(!chunk.length) return;
+          if(/^\s+$/.test(chunk)){
+            frag.appendChild(document.createTextNode(chunk));
+            return;
+          }
+          var wordSpan = document.createElement('span');
+          wordSpan.className = 'word';
+          for(var i=0;i<chunk.length;i++){
+            var letterSpan = document.createElement('span');
+            letterSpan.className = 'letter';
+            letterSpan.style.transitionDelay = Math.min(counter*14, 750)+'ms';
+            letterSpan.textContent = chunk[i];
+            counter++;
+            wordSpan.appendChild(letterSpan);
+          }
+          frag.appendChild(wordSpan);
+        });
+        node.parentNode.replaceChild(frag, node);
+      }
+      function walk(node){
+        if(node.nodeType === 3){
+          processTextNode(node);
+        } else if(node.nodeType === 1 && node.tagName !== 'BR'){
+          Array.prototype.slice.call(node.childNodes).forEach(walk);
+        }
+      }
+      Array.prototype.slice.call(el.childNodes).forEach(walk);
+      el.classList.add('letters');
+    }
+
+    targets.forEach(wrapLetters);
+
+    var io = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('active');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:"0px 0px -8% 0px" });
+
+    targets.forEach(function(el){ io.observe(el); });
+
+    /* Se o usuário trocar de idioma (PT/FR/EN), o texto é reescrito via innerHTML —
+       aqui a gente reaplica o efeito sem esconder de novo o que já apareceu. */
+    var mo = new MutationObserver(function(mutations){
+      mo.disconnect();
+      mutations.forEach(function(m){
+        var el = m.target;
+        if(targets.indexOf(el) === -1) return;
+        var wasActive = el.classList.contains('active');
+        wrapLetters(el);
+        if(wasActive) el.classList.add('active');
+      });
+      targets.forEach(function(t){ mo.observe(t, { childList:true }); });
+    });
+    targets.forEach(function(t){ mo.observe(t, { childList:true }); });
+  })();
+</script>
+
+<!-- Script otimizado do Intersection Observer para disparar animações suavemente no celular -->
+<script>
+  (function(){
+    var reveals = document.querySelectorAll('.reveal');
+
+    var observerOptions = {
+      root: null,
+      threshold: 0.05,
+      rootMargin: "0px 0px 50px 0px"
+    };
+
+    var observer = new IntersectionObserver(function(entries, observer){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+>>>>>>> 70a077b6e318ac1108e95f5663c252dc5dfa92f8
         }
       );
 
