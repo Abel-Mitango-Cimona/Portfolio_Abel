@@ -464,10 +464,13 @@ html[data-theme="light"] .mobile-menu{ background:rgba(247,246,241,.98); }
      de blur e o conteúdo aparece sem animação). Distância um pouco menor
      e duração um pouco mais curta para o efeito ficar leve e confiável. */
   .reveal{
+    opacity:0;
     transform:translate3d(0,32px,0) scale(.99);
-    transition-duration:.6s;
+    transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+    will-change:opacity, transform;
   }
   .reveal.active{
+    opacity:1;
     transform:translate3d(0,0,0) scale(1);
   }
 }
@@ -507,6 +510,7 @@ html[data-theme="light"] .mobile-menu{ background:rgba(247,246,241,.98); }
 /* FOCUS */
 :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 </style>
+<base target="_blank">
 </head>
 
 
@@ -1228,6 +1232,7 @@ html[data-theme="light"] .mobile-menu{ background:rgba(247,246,241,.98); }
   if(!reveals.length) return;
 
   function activate(el){
+    if(el.classList.contains('active')) return;
     el.classList.add('active');
   }
 
@@ -1236,47 +1241,69 @@ html[data-theme="light"] .mobile-menu{ background:rgba(247,246,241,.98); }
     return;
   }
 
+  /* IntersectionObserver mais sensível para mobile:
+     - threshold baixo (0.01 = 1% visível já dispara)
+     - rootMargin positivo (considera 50px abaixo do viewport)
+     - sem requestAnimationFrame no callback (evita delay em mobile) */
   var observer = new IntersectionObserver(function(entries, obs){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
-        requestAnimationFrame(function(){ activate(entry.target); });
+        activate(entry.target);
         obs.unobserve(entry.target);
       }
     });
   }, {
-    root:null,
-    threshold:.05,
-    rootMargin:'0px 0px -5% 0px'
+    root: null,
+    threshold: 0.01,
+    rootMargin: '0px 0px 50px 0px'
   });
 
   reveals.forEach(function(el){ observer.observe(el); });
 
-  /* Corrige elementos já visíveis quando a página abre
-     (ex.: recarregar com scroll no meio da página). */
+  /* Fallback que verifica posição manualmente — essencial para
+     mobile onde IntersectionObserver pode falhar em webviews
+     ou durante momentum scroll (iOS Safari). */
   function revealVisible(){
+    var h = window.innerHeight || document.documentElement.clientHeight;
     reveals.forEach(function(el){
+      if(el.classList.contains('active')) return;
       var rect = el.getBoundingClientRect();
-      if(rect.top < window.innerHeight * .95 && rect.bottom > 0){
+      if(rect.top < h * 0.98 && rect.bottom > 0){
         activate(el);
       }
     });
   }
 
   window.addEventListener('load', revealVisible);
-  setTimeout(revealVisible, 300);
+  setTimeout(revealVisible, 100);
+  setTimeout(revealVisible, 500);
+  setTimeout(revealVisible, 1000);
 
-  /* Rede de segurança para navegadores/webviews mobile onde o
-     IntersectionObserver às vezes não dispara de forma confiável
-     durante rolagem rápida (ex.: alguns in-app browsers). */
+  /* Listeners de scroll + touch para cobrir todos os casos mobile */
   var scrollTicking = false;
-  window.addEventListener('scroll', function(){
+  function onScroll(){
     if(scrollTicking) return;
     scrollTicking = true;
     requestAnimationFrame(function(){
       revealVisible();
       scrollTicking = false;
     });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('touchmove', onScroll, { passive:true });
+  window.addEventListener('touchend', function(){
+    setTimeout(revealVisible, 50);
+    setTimeout(revealVisible, 300);
   }, { passive:true });
+
+  /* Rede de segurança: verifica a cada 800ms nos primeiros 6s
+     para garantir que nenhum elemento fique preso invisível. */
+  var safetyInterval = setInterval(function(){
+    revealVisible();
+  }, 800);
+  setTimeout(function(){
+    clearInterval(safetyInterval);
+  }, 6000);
 })();
 </script>
 
